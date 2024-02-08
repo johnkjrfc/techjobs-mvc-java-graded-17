@@ -15,7 +15,7 @@ import java.util.HashMap;
  * Created by LaunchCode
  */
 @Controller
-@RequestMapping(value = "list")
+@RequestMapping(value = "list") //localhost:8080/list
 public class ListController {
 
     static HashMap<String, String> columnChoices = new HashMap<>();
@@ -28,6 +28,7 @@ public class ListController {
         columnChoices.put("positionType", "Position Type");
         columnChoices.put("coreCompetency", "Skill");
 
+        //tableChoices.put("all",)
         tableChoices.put("employer", JobData.getAllEmployers());
         tableChoices.put("location", JobData.getAllLocations());
         tableChoices.put("positionType", JobData.getAllPositionTypes());
@@ -38,6 +39,7 @@ public class ListController {
     public String list(Model model) {
         model.addAttribute("columns", columnChoices);
         model.addAttribute("tableChoices", tableChoices);
+        //model.addAttribute("all");
         model.addAttribute("employers", JobData.getAllEmployers());
         model.addAttribute("locations", JobData.getAllLocations());
         model.addAttribute("positions", JobData.getAllPositionTypes());
@@ -46,7 +48,7 @@ public class ListController {
         return "list";
     }
 
-    @GetMapping(value = "jobs")
+    @GetMapping(value = "jobs")                                                      //optional param
     public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam(required = false) String value) {
         ArrayList<Job> jobs;
         if (column.equals("all")){
